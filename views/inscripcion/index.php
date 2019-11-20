@@ -406,7 +406,7 @@ $this->registerJs($js);
 
  <?php 
          Modal::begin([
-            'header'=>'<h4>Job Created</h4>',
+            'header'=>'<h4>Información</h4>',
             'id'=>'modal',
             'size'=>'modal-lg',
          ]);
