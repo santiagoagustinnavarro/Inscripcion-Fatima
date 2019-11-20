@@ -362,7 +362,9 @@ $barrios=[
                     }
             }
         );
-                    
+        $(\"input[name='Aceptar']\").click(function(){
+             $(\"#modal\").modal();
+        })
                         
                 })";
            return $this->render('index',['js'=>$js,'provincias'=>$provincias,'localidades'=>$localidades,'barrios'=>$barrios]);

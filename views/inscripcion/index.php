@@ -2,6 +2,7 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use yii\jui\DatePicker;
+use yii\bootstrap\Modal;
 
 $this->title = 'Formulario de inscripción';
 $this->registerJs($js);
@@ -398,10 +399,21 @@ $this->registerJs($js);
        ?>
     </div>
 </div>
-<?= Html::input('submit','Aceptar','Aceptar',['class'=>'btn btn-success']); ?>
+<?= Html::input('button','Aceptar','Aceptar',['class'=>'btn btn-success']); ?>
 
 <!--------------------Fin Alumno----------------------------------------------------->
  <?php  ActiveForm::end();?>
+
+ <?php 
+         Modal::begin([
+            'header'=>'<h4>Job Created</h4>',
+            'id'=>'modal',
+            'size'=>'modal-lg',
+         ]);
+
+        echo "<div id='modalContent'>Datos actualizados correctamente</div>";
+        Modal::end();
+?>
 
 
 
