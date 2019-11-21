@@ -213,7 +213,7 @@ $barrios=[
 ];
             $js="$(document).ready(
                 function(){
-                    $(\"select[name='responsable[provincia]']\").click(
+                    $(\"select[name='responsable[provincia]']\").change(
                         function(){
                             var provincia=$(\"select[name='responsable[provincia]']\");
                             var localidad=$(\"select[name='responsable[localidad]']\");
@@ -246,7 +246,7 @@ $barrios=[
                             
                             }
                         });
-                    $(\"select[name='responsable[localidad]']\").click(function(){
+                    $(\"select[name='responsable[localidad]']\").change(function(){
                         var barrio=$(\"select[name='responsable[barrio]']\");
                         var localidad=$(\"select[name='responsable[localidad]']\");
                         var codigo=$(\"input[name='responsable[codigo_postal]']\");
