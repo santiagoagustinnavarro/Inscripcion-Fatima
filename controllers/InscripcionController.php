@@ -11,7 +11,8 @@
     
     class InscripcionController extends Controller{
 
-        function actionIndex(){
+        function actionIndex($registrado='false'){
+            $registrado= $boolStrVar1 = filter_var($registrado, FILTER_VALIDATE_BOOLEAN);
             $provincias=  
 ['Ninguna'=>'Seleccione una opcion',
 'Neuquen'=>'Neuquen'      
@@ -366,8 +367,54 @@ $barrios=[
              $(\"#modal\").modal();
         })
                         
-                })";
-           return $this->render('index',['js'=>$js,'provincias'=>$provincias,'localidades'=>$localidades,'barrios'=>$barrios]);
+       ";
+       if($registrado){
+        $js=$js."
+        $('select[name=alumnos]').change(
+            function(){
+                var select=$('select[name=alumnos]').val();
+                if(select=='Jose Alberto Navarro'){
+                    $('#alumnos').show();
+                    $('input[name=\"alumno[dni]\"').val('38375642');
+                    $('input[name=\"alumno[nombre]\"').val('Jose Alberto');
+                    $('input[name=\"alumno[apellidos]\"').val('Navarro');
+                    $('input[name=\"alumno[lugarNacimiento]\"').val('Santiago del Estero');
+                    $('input[name=\"alumno[fechaNacimiento]\"').val('12/04/1994');
+                    $('input[name=\"alumno[fechaIngreso]\"').val('12/04/2012');
+                    $('input[name=\"alumno[lugarBautismo]\"').val('Cipolletti');
+                    $('input[name=\"alumno[fechaBautismo]\"').val('12/04/2002');
+                    $('input[name=\"alumno[lugarComunion]\"').val('Cipolletti');
+                    $('input[name=\"alumno[fechaComunion]\"').val('15/04/2003');
+                    $('select[name=\"alumno[confirmacion]\"').val('No');
+                    $('input[name=\"alumno[lugarConfirmacion]\"').attr('disabled',true);
+                    $('input[name=\"alumno[fechaConfirmacion]\"').attr('disabled',true);
+                }else{
+                    if(select=='nuevo'){
+                        $('input[name=\"alumno[dni]\"').val('');
+                    $('input[name=\"alumno[nombre]\"').val('');
+                    $('input[name=\"alumno[apellidos]\"').val('');
+                    $('input[name=\"alumno[lugarNacimiento]\"').val('');
+                    $('input[name=\"alumno[fechaNacimiento]\"').val('');
+                    $('input[name=\"alumno[fechaIngreso]\"').val('');
+                    $('input[name=\"alumno[lugarBautismo]\"').val('');
+                    $('input[name=\"alumno[fechaBautismo]\"').val('');
+                    $('input[name=\"alumno[lugarComunion]\"').val('');
+                    $('input[name=\"alumno[fechaComunion]\"').val('');
+                    $('select[name=\"alumno[confirmacion]\"').val('Si');
+                   
+                        $('#alumnos').show();
+                    }
+                }
+            }
+        )
+        
+        ";
+    }
+    $js=$js."})";
+                
+              
+             
+           return $this->render('index',['js'=>$js,'provincias'=>$provincias,'localidades'=>$localidades,'barrios'=>$barrios,'registrado'=>$registrado]);
         }
     }
 ?>
