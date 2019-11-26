@@ -610,7 +610,7 @@ verificaRegistro($registrado,$provincias);
                 </div>
                 <div class="col-md-6">
                 <?= Html::label('Cuit/Cuil','padre[cuil]'); ?>
-                <?= Html::input('text','padre[cuil]','2065879876',['class'=>'form-control']); ?>
+                <?= Html::input('text','padre[cuil]','20658798767',['class'=>'form-control']); ?>
                 </div>
             </div>
             
@@ -684,44 +684,44 @@ verificaRegistro($registrado,$provincias);
             
             <?=Html::tag('h2','Madre');?>
             <?= Html::label('Apellido y nombre','madre[apellidoYNombre]'); ?>
-            <?= Html::input('text','madre[apellidoYNombre]','',['class'=>'form-control']); ?>
+            <?= Html::input('text','madre[apellidoYNombre]','Susana Isla',['class'=>'form-control']); ?>
             <div class="row">
                 <div class="col-md-6">
                 <?= Html::label('Ocupación','madre[ocupacion]'); ?>
-                <?= Html::input('text','madre[ocupacion]','',['class'=>'form-control']); ?>
+                <?= Html::input('text','madre[ocupacion]','Farmaceútica',['class'=>'form-control']); ?>
                 </div>
                 <div class="col-md-6">
                 <?= Html::label('Cuit/Cuil','madre[cuil]'); ?>
-                <?= Html::input('text','madre[cuil]','',['class'=>'form-control']); ?>
+                <?= Html::input('text','madre[cuil]','1847598766',['class'=>'form-control']); ?>
                 </div>
             </div>
             
             <div class="row">
                 <div class="col-md-6">
                 <?= Html::label('Telefono fijo','madre[telefonoFijo]'); ?>  
-                 <?= Html::input('number','madre[telefonoFijo]','',['class'=>'form-control']); ?>
+                 <?= Html::input('number','madre[telefonoFijo]','02972854789',['class'=>'form-control']); ?>
                 </div>
                 <div class="col-md-6">
                 <?= Html::label('Telefono Movil','madre[telefonoMovil]'); ?>
-                <?= Html::input('number','madre[telefonoMovil]','',['class'=>'form-control']); ?>
+                <?= Html::input('number','madre[telefonoMovil]','2944611396',['class'=>'form-control']); ?>
                 </div>
                
             </div>
             <div class="row">
                 <div class="col-md-6">
                 <?= Html::label('Lugar de trabajo','madre[lugarTrabajo]'); ?>
-                <?= Html::input('text','madre[lugarTrabajo]','',['class'=>'form-control']); ?>
+                <?= Html::input('text','madre[lugarTrabajo]','Cipolletti',['class'=>'form-control']); ?>
                 </div>
                 <div class="col-md-6">
                 <?= Html::label('Telefono Laboral','madre[telefonoLaboral]'); ?>
-                <?= Html::input('number','madre[telefonoLaboral]','',['class'=>'form-control']); ?>
+                <?= Html::input('number','madre[telefonoLaboral]','02972845732',['class'=>'form-control']); ?>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-6">
                 <?= Html::label('Fecha de nacimiento','madre[fechaNacimiento]'); ?>
                 <span class="glyphicon glyphicon-calendar"></span> 
-                <?= DatePicker::widget([
+                <?= DatePicker::widget(['value'=>'05/07/1975',
                    'name'=>'madre[fechaNacimiento]','language' => 'es','dateFormat' => 'dd/MM/yyyy',
                    'clientOptions'=>[
                    'changeMonth' => true, 
