@@ -5,6 +5,7 @@ $db = require __DIR__ . '/db.php';
 
 $config = [
     'id' => 'basic',
+    
     'name'=>'Inscripcion',
     'homeUrl'=>'http://jazz.serverdnspoint.com/~colegiof/sitioweb/index.php',
     'basePath' => dirname(__DIR__),

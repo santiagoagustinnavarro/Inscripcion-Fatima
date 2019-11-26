@@ -451,7 +451,7 @@ verificaRegistro($registrado,$provincias);
         
           
         
-        echo Html::input('button','nuevoAlumno','Cargar un alumno',['class'=>'btn btn-info']);
+        echo Html::input('button','nuevoAlumno','Cargar formulario',['class'=>'btn btn-info']);
     }
 
 
@@ -569,7 +569,7 @@ verificaRegistro($registrado,$provincias);
             <div class="row">
                 <div class="col-md-3">
                 <?= Html::label('Piso','responsable[piso]'); ?>
-                <?= Html::input('number','responsable[piso]','Ninguno',['class'=>'form-control']); ?>
+                <?= Html::input('number','responsable[piso]','',['class'=>'form-control']); ?>
                 </div>
                 <div class="col-md-3">
                 <?= Html::label('Departamento','responsable[departamento]'); ?>

@@ -403,12 +403,22 @@ $barrios=[
                     $('select[name=\"alumno[confirmacion]\"').val('Si');
                    
                         $('#alumnos').show();
+                    }else{
+                        if(select=='0'){
+                            $('#alumnos').hide();
+                        }
                     }
                 }
             }
         )
         
         ";
+    }else{
+        $js=$js."$('button[name=nuevoAlumno]').click(
+            function(){
+
+            }
+        )";
     }
     $js=$js."})";
                 
