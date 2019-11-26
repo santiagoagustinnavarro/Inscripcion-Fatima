@@ -59,9 +59,9 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; COLEGIO FÁTIMA <?= date('Y') ?></p>
+        <p class="pull-left">Copyright &copy; COLEGIO FÁTIMA <?= date('Y') ?></p>
 
-        <p class="pull-right"><?= Yii::powered() ?></p>
+       
     </div>
 </footer>
 
