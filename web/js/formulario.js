@@ -177,7 +177,7 @@ console.log(datosSacramento['bautismo']['fecha']);
     $("input[name='alumno[lugarBautismo]']").val(datosSacramento['bautismo']['lugar']);
     $("input[name='alumno[lugarComunion]']").val(datosSacramento['comunion']['lugar']);
     $("input[name='alumno[lugarConfirmacion]']").val(datosSacramento['confirmacion']['lugar']);
-    $("input[name='alumno[fechaBautismo]']").val(Date(datosSacramento['bautismo']['fecha']));
+    $("input[name='alumno[fechaBautismo]']").val(datosSacramento['bautismo']['fecha']);
     $("input[name='alumno[fechaComunion]']").val(datosSacramento['comunion']['fecha']);
     $("input[name='alumno[fechaConfirmacion]']").val(datosSacramento['confirmacion']['fecha']);
     if ($("select[name='alumno[bautismo]']").val() == "NO") {
