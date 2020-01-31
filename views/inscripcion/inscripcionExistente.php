@@ -249,7 +249,7 @@ $this->title = 'Formulario de inscripción';
 <?=Html::tag('h2','Alumnos');?>
 <?php
 $alumnos=ArrayHelper::map($alumno,'ODEO_AlumnoKey','Nombre');
-$alumnos["new"]='Nuevo alumno'
+$alumnos["new"]='Nuevo alumno';//Genera la opcion de nuevo alumno en el select
 ?>
 <?=Html::dropDownList('alumnos','',$alumnos,['class'=>'form-control','prompt'=>'Selecciona un alumno...','label'=>'Lista de alumnos',
 'onchange'=>"datosAlumno('".Url::base()."')"]);?>
