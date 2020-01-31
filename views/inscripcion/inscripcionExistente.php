@@ -247,7 +247,11 @@ $this->title = 'Formulario de inscripción';
 <?= Html::tag('hr');?>
 <!--------------------Inicio Alumno----------------------------------------------------->
 <?=Html::tag('h2','Alumnos');?>
-<?=Html::dropDownList('alumnos','',ArrayHelper::map($alumno,'ODEO_AlumnoKey','Nombre'),['class'=>'form-control','prompt'=>'Selecciona un alumno...','label'=>'Lista de alumnos',
+<?php
+$alumnos=ArrayHelper::map($alumno,'ODEO_AlumnoKey','Nombre');
+$alumnos["new"]='Nuevo alumno'
+?>
+<?=Html::dropDownList('alumnos','',$alumnos,['class'=>'form-control','prompt'=>'Selecciona un alumno...','label'=>'Lista de alumnos',
 'onchange'=>"datosAlumno('".Url::base()."')"]);?>
 
 <div id="cargaAlumnos"></div>
@@ -418,6 +422,7 @@ $this->title = 'Formulario de inscripción';
            </div>
            <br/>
            <br/>
+
            <?php echo Html::button('Guardar',['class'=>'btn btn-success','type'=>'submit','onclick'=>"alert('Acción en construcción')"]);?>
            </div>
 <?php 

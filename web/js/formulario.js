@@ -20,7 +20,7 @@ function traerLocalidades(baseYii) {
             }
         }
         ,
-        beforeSend: function (){
+        beforeSend: function () {
             $("#cargaLocalidad").html("<img src='" + baseYii + "/images/ajax-loader.gif' />Cargando,espere por favor...");
         }
 
@@ -59,7 +59,8 @@ function traerCP(baseYii) {
  *  @param {String} baseYii
  */
 function datosAlumno(baseYii) {
-    if ($("select[name='alumnos']").val() == '') {//Caso en el que se ingresa un nuevo alumno (limpieza de datos alumno)
+    if ($("select[name='alumnos']").val() == 'new') {//Caso en el que se ingresa un nuevo alumno (limpieza de datos alumno)
+        $("#alumnos").show();
         $("input[name='alumno[nombre]']").val('');
         $("input[name='alumno[apellidos]']").val('');
         $("input[name='alumno[dni]']").val('');
@@ -70,22 +71,28 @@ function datosAlumno(baseYii) {
         $("input[name='alumno[fechaNacimiento]']").val('');
         $("input[name='alumno[fechaConfirmacion]']").val('');
         $("input[name='alumno[lugarNacimiento]']").val('');
-    } else {//El alumno ya se encuentra cargado en la BD
-        $.ajax({
-            type: 'POST',
-            dataType: 'JSON',
-            url: 'inscripcion/traeralumnocompleto',
-            data: { 'ODEO_alumnoKey': +$("select[name='alumnos']").val() },
-            success: function (response) {//Traemos los datos y los volcamos en el formulario
-                var array, elem;
-                $("#cargaAlumnos").html("");
-                $("#alumnos").show();
-                cargaAlumnoAux(response);
-            }
-            , beforeSend: function () {
-                $("#cargaAlumnos").html("<img src='" + baseYii + "/images/ajax-loader.gif' />Cargando,espere por favor...");
-            }
-        })
+    } else {
+
+        if ($("select[name='alumnos']").val() == '') {
+            $("#alumnos").hide();
+        } else {
+            //El alumno ya se encuentra cargado en la BD
+            $.ajax({
+                type: 'POST',
+                dataType: 'JSON',
+                url: 'inscripcion/traeralumnocompleto',
+                data: { 'ODEO_alumnoKey': +$("select[name='alumnos']").val() },
+                success: function (response) {//Traemos los datos y los volcamos en el formulario
+                    var array, elem;
+                    $("#cargaAlumnos").html("");
+                    $("#alumnos").show();
+                    cargaAlumnoAux(response);
+                }
+                , beforeSend: function () {
+                    $("#cargaAlumnos").html("<img src='" + baseYii + "/images/ajax-loader.gif' />Cargando,espere por favor...");
+                }
+            })
+        }
     }
 }
 /**
@@ -129,7 +136,7 @@ function cargaAlumnoAux(arrayAlumno) {
  */
 function nivelGradoDivision(grado, nivel, division) {
     var elem, elemAux;
-    
+
     $.ajax({
         type: 'GET',
         dataType: 'JSON',
@@ -189,19 +196,19 @@ function cargaSacramentos(datosSacramento) {
  * Dado algún sacramento verifica si se dispone de el , habilitando o deshabilitando según corresponda
  * @param {String} unSacramento 
  */
-function deshabilitarSacramento(unSacramento){
-    var sacramentoUpper=unSacramento.charAt(0).toUpperCase() + unSacramento.slice(1);
-    if ($("select[name='alumno["+unSacramento+"]']").val() == "NO") {
-        $("input[name='alumno[lugar"+sacramentoUpper+"]']").val('');
-        $("input[name='alumno[fecha"+sacramentoUpper+"]']").val('');
-        $("input[name='alumno[diosecis"+sacramentoUpper+"]']").val('');
-        $("input[name='alumno[lugar"+sacramentoUpper+"]']").prop("disabled",true);
-        $("input[name='alumno[diosecis"+sacramentoUpper+"]']").prop("disabled",true);
-        $("input[name='alumno[fecha"+sacramentoUpper+"]']").prop("disabled",true);
-    }else{
-        $("input[name='alumno[lugar"+sacramentoUpper+"]']").prop("disabled",false);
-        $("input[name='alumno[fecha"+sacramentoUpper+"]']").prop("disabled",false);
-        $("input[name='alumno[diosecis"+sacramentoUpper+"]']").prop("disabled",false);
+function deshabilitarSacramento(unSacramento) {
+    var sacramentoUpper = unSacramento.charAt(0).toUpperCase() + unSacramento.slice(1);
+    if ($("select[name='alumno[" + unSacramento + "]']").val() == "NO") {
+        $("input[name='alumno[lugar" + sacramentoUpper + "]']").val('');
+        $("input[name='alumno[fecha" + sacramentoUpper + "]']").val('');
+        $("input[name='alumno[diosecis" + sacramentoUpper + "]']").val('');
+        $("input[name='alumno[lugar" + sacramentoUpper + "]']").prop("disabled", true);
+        $("input[name='alumno[diosecis" + sacramentoUpper + "]']").prop("disabled", true);
+        $("input[name='alumno[fecha" + sacramentoUpper + "]']").prop("disabled", true);
+    } else {
+        $("input[name='alumno[lugar" + sacramentoUpper + "]']").prop("disabled", false);
+        $("input[name='alumno[fecha" + sacramentoUpper + "]']").prop("disabled", false);
+        $("input[name='alumno[diosecis" + sacramentoUpper + "]']").prop("disabled", false);
     }
 }
 
@@ -209,36 +216,36 @@ function deshabilitarSacramento(unSacramento){
  * Al hacer click en algun nivel autocompleta los grados que pertenecen al mismo
  */
 
-function traerGrado(){
+function traerGrado() {
     $.ajax({
-        type :'POST',
-        dataType:'JSON',
-        url  :'inscripcion/traergrado',
-        data:{'ODEO_nivelKey':+$("select[name='alumno[nivel]']").val()},
-        success  : function(response) {
+        type: 'POST',
+        dataType: 'JSON',
+        url: 'inscripcion/traergrado',
+        data: { 'ODEO_nivelKey': +$("select[name='alumno[nivel]']").val() },
+        success: function (response) {
             $("select[name='alumno[grado]']").html('');
             $("select[name='alumno[seccion]']").html('');
-            for(elem in response){
-                $("select[name='alumno[grado]']").append('<option value='+response[elem].ODEO_GradoKey+'>'+response[elem].DescripcionFacturacion+'</option>');
-            } 
+            for (elem in response) {
+                $("select[name='alumno[grado]']").append('<option value=' + response[elem].ODEO_GradoKey + '>' + response[elem].DescripcionFacturacion + '</option>');
+            }
         }
-       });
+    });
 }
 /**
  * Al hacer click en algun grado autocompleta las divisiones que pertenecen al mismo
  */
-function traerDivision(){
+function traerDivision() {
     $.ajax({
-        type :'POST',
-        dataType:'JSON',
-        url  :'inscripcion/traerdivision',
-        data:{'ODEO_gradoKey':+$("select[name='alumno[grado]']").val()},
-        success  : function(response) {
+        type: 'POST',
+        dataType: 'JSON',
+        url: 'inscripcion/traerdivision',
+        data: { 'ODEO_gradoKey': +$("select[name='alumno[grado]']").val() },
+        success: function (response) {
             $("select[name='alumno[seccion]']").html('');
-            for(elem in response){
-              
-                $("select[name='alumno[seccion]']").append('<option value='+response[elem].ODEO_DivisionKey+'>'+response[elem].Nombre+'</option>');
-            } 
+            for (elem in response) {
+
+                $("select[name='alumno[seccion]']").append('<option value=' + response[elem].ODEO_DivisionKey + '>' + response[elem].Nombre + '</option>');
+            }
         }
-       })
+    })
 }

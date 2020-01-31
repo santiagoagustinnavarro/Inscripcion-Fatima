@@ -252,8 +252,6 @@
               
                 return json_encode($alumno);
         }
-        function actionTraerdivisiones(){
-            
-        }
+        
     }
 ?>
