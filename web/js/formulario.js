@@ -60,15 +60,16 @@ function traerCP(baseYii) {
  */
 function datosAlumno(baseYii) {
     if ($("select[name='alumnos']").val() == '') {//Caso en el que se ingresa un nuevo alumno (limpieza de datos alumno)
-        $("input[name='alumno[nombre]']").val('')
-        $("input[name='alumno[apellidos]']").val('')
-        $("input[name='alumno[dni]']").val('')
-        $("input[name='alumno[fechaIngreso]']").val('')
-        $("input[name='alumno[fechaEgreso']").val('')
-        $("input[name='alumno[fechaBautismo']").val('')
-        $("input[name='alumno[fechaComunion']").val('')
-        $("input[name='alumno[fechaNacimiento']").val('')
-        $("input[name='alumno[fechaConfirmacion']").val('')
+        $("input[name='alumno[nombre]']").val('');
+        $("input[name='alumno[apellidos]']").val('');
+        $("input[name='alumno[dni]']").val('');
+        $("input[name='alumno[fechaIngreso]']").val('');
+        $("input[name='alumno[fechaEgreso]']").val('');
+        $("input[name='alumno[fechaBautismo]']").val('');
+        $("input[name='alumno[fechaComunion]']").val('');
+        $("input[name='alumno[fechaNacimiento]']").html('');
+        $("input[name='alumno[fechaConfirmacion]']").val('');
+        $("input[name='alumno[lugarNacimiento]']").html('');
     } else {//El alumno ya se encuentra cargado en la BD
         $.ajax({
             type: 'POST',
@@ -156,7 +157,7 @@ function nivelGradoDivision(grado, nivel, division) {
 
         },
         error: function () {
-            alert('Error en obtencion de nivel,grado y division')
+            alert('Error en obtencion de nivel,grado y division');
         }
 
     });
