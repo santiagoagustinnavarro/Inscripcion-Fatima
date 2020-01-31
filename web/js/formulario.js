@@ -67,9 +67,9 @@ function datosAlumno(baseYii) {
         $("input[name='alumno[fechaEgreso]']").val('');
         $("input[name='alumno[fechaBautismo]']").val('');
         $("input[name='alumno[fechaComunion]']").val('');
-        $("input[name='alumno[fechaNacimiento]']").html('');
+        $("input[name='alumno[fechaNacimiento]']").val('');
         $("input[name='alumno[fechaConfirmacion]']").val('');
-        $("input[name='alumno[lugarNacimiento]']").html('');
+        $("input[name='alumno[lugarNacimiento]']").val('');
     } else {//El alumno ya se encuentra cargado en la BD
         $.ajax({
             type: 'POST',
