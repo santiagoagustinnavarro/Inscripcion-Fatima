@@ -271,37 +271,13 @@ $this->title = 'Formulario de inscripción';
            <div class="row">
            <div class="col-md-4">
                <?= $form->field($nivelModel,'Nombre')->dropDownList(ArrayHelper::map($nivelModel->find()->asArray()->all(),'ODEO_NivelKey','Nombre'), ['name'=>'alumno[nivel]','prompt' => 'Seleccione Uno' ,'class'=>'form-control'
-               ,'onchange'=>"$.ajax({
-                type :'POST',
-                dataType:'JSON',
-                url  :'inscripcion/traergrado',
-                data:{'ODEO_nivelKey':+$(\"select[name='alumno[nivel]']\").val()},
-                success  : function(response) {
-                    $(\"select[name='alumno[grado]']\").html('');
-                    $(\"select[name='alumno[seccion]']\").html('');
-                    for(elem in response){
-                        $(\"select[name='alumno[grado]']\").append('<option value=\''+response[elem].ODEO_GradoKey+'\'>'+response[elem].DescripcionFacturacion+'</option>');
-                    } 
-                }
-               })"
+               ,'onchange'=>"traerGrado();"
                ])->label('Nivel'); ?>
            </div>
            <div class="col-md-4">
                <?= Html::label('Sala/Grado/Curso','alumno[grado]'); ?>
                <?=Html::dropDownList('alumno[grado]','',[],['class'=>'form-control',
-               'onclick'=>"$.ajax({
-                type :'POST',
-                dataType:'JSON',
-                url  :'inscripcion/traerdivision',
-                data:{'ODEO_gradoKey':+$(\"select[name='alumno[grado]']\").val()},
-                success  : function(response) {
-                    $(\"select[name='alumno[seccion]']\").html('');
-                    for(elem in response){
-                      
-                        $(\"select[name='alumno[seccion]']\").append('<option value=\''+response[elem].ODEO_DivisionKey+'\'>'+response[elem].Nombre+'</option>');
-                    } 
-                }
-               })"
+               'onclick'=>"traerDivision();"
                ]); ?>
            </div>
            <div class="col-md-4">
@@ -360,17 +336,7 @@ $this->title = 'Formulario de inscripción';
            <div class="col-md-3">
            <?= Html::label('Bautismo','alumno[bautismo]'); ?>
            <?=Html::dropDownList('alumno[bautismo]','',['SI'=>'Si','NO'=>'No'],['class'=>'form-control',
-           'onchange'=>
-           "
-           if($(\"select[name='alumno[bautismo]']\").val()=='SI'){
-            $(\"input[name='alumno[lugarBautismo]']\").removeAttr('disabled')
-            $(\"input[name='alumno[fechaBautismo]']\").removeAttr('disabled')
-            $(\"input[name='alumno[diosecisBautismo]']\").removeAttr('disabled')
-           }else{
-            $(\"input[name='alumno[lugarBautismo]']\").attr('disabled','disabled');
-            $(\"input[name='alumno[fechaBautismo]']\").attr('disabled','disabled');
-            $(\"input[name='alumno[diosecisBautismo]']\").attr('disabled','disabled');
-           }"]); ?>
+           'onchange'=>"deshabilitarSacramento('bautismo')"]); ?>
            </div>
            <div class="col-md-3">
            <?= Html::label('Lugar de bautismo','alumno[lugarBautismo]'); ?>
@@ -398,16 +364,7 @@ $this->title = 'Formulario de inscripción';
            <div class="col-md-3">
            <?= Html::label('Comunion','alumno[comunion]'); ?>
            <?=Html::dropDownList('alumno[comunion]','',['SI'=>'Si','NO'=>'No'],['class'=>'form-control',
-           'onchange'=>
-           "if($(\"select[name='alumno[comunion]']\").val()=='SI'){
-            $(\"input[name='alumno[lugarComunion]']\").removeAttr('disabled')
-            $(\"input[name='alumno[fechaComunion]']\").removeAttr('disabled')
-            $(\"input[name='alumno[diosecisComunion]']\").removeAttr('disabled')
-           }else{
-            $(\"input[name='alumno[lugarComunion]']\").attr('disabled','disabled');
-            $(\"input[name='alumno[fechaComunion]']\").attr('disabled','disabled');
-            $(\"input[name='alumno[diosecisComunion]']\").attr('disabled','disabled');
-           }"]); ?>
+           'onchange'=>"deshabilitarSacramento('comunion')"]); ?>
            </div>
            <div class="col-md-3">
            <?= Html::label('Lugar de Comunion','alumno[lugarComunion]'); ?>
@@ -435,16 +392,7 @@ $this->title = 'Formulario de inscripción';
            <div class="col-md-3">
            <?= Html::label('Confirmacion','alumno[confirmacion]'); ?>
            <?=Html::dropDownList('alumno[confirmacion]','',['SI'=>'Si','NO'=>'No'],['class'=>'form-control',
-           'onchange'=>
-           "if($(\"select[name='alumno[confirmacion]']\").val()=='SI'){
-            $(\"input[name='alumno[lugarConfirmacion]']\").removeAttr('disabled')
-            $(\"input[name='alumno[fechaConfirmacion]']\").removeAttr('disabled')
-            $(\"input[name='alumno[diosecisConfirmacion]']\").removeAttr('disabled')
-           }else{
-            $(\"input[name='alumno[lugarConfirmacion]']\").attr('disabled','disabled');
-            $(\"input[name='alumno[fechaConfirmacion]']\").attr('disabled','disabled');
-            $(\"input[name='alumno[diosecisConfirmacion]']\").attr('disabled','disabled');
-           }"]); ?>
+           'onchange'=>"deshabilitarSacramento('confirmacion')"]); ?>
            </div>
            <div class="col-md-3">
            <?= Html::label('Lugar de Confirmación','alumno[lugarConfirmacion]'); ?>
