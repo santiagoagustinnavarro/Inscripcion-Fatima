@@ -205,14 +205,6 @@
             return json_encode($divisiones);
 
         }
-        function actionDivisionasignada($grado,$nivel){
-            $divisiones=ODEODivision::find()->where(['ODEO_GradoKey'=>$grado])->asArray()->all();
-            $grados=ODEOGrado::find()->where(['ODEO_NivelKey'=>$nivel])->asArray()->all();
-            $niveles=ODEONivel::find()->asArray()->all();
-            $array=["divisiones"=>$divisiones,"grados"=>$grados,"niveles"=>$niveles];
-            return json_encode($array);
-           
-        }
 
         function actionTraeralumnocompleto(){
             $idAlumno=$_POST['ODEO_alumnoKey'];

@@ -2,10 +2,10 @@
 
 return [
     'class' => 'yii\db\Connection',
-    'dsn' => 'mysql:host=localhost;dbname=yii2basic',
-    'username' => 'root',
-    'password' => '',
-    'charset' => 'utf8',
+    'dsn' => 'sqlsrv:server=localhost\SQLEXPRESS;database=PW_Gestion',
+    'username' => 'sa',
+    'password' => 'sip#2020',
+    //srvbejerman
 
     // Schema cache options (for production environment)
     //'enableSchemaCache' => true,
