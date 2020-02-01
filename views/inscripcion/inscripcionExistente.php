@@ -289,8 +289,6 @@ $alumnos["new"]='Nuevo alumno';//Genera la opcion de nuevo alumno en el select
                <?=Html::dropDownList('alumno[seccion]','',[],['class'=>'form-control']); ?>
            </div>
            <div class="col-md-1" id="cargaAsignaAlumno">
-               <?= Html::label('Seccion','alumno[seccion]'); ?>
-               <?=Html::dropDownList('alumno[seccion]','',[],['class'=>'form-control']); ?>
            </div>
            </div>
            <div class="row">
