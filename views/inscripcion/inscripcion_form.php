@@ -6,7 +6,7 @@ use yii\jui\DatePicker;
 use yii\bootstrap\Modal;
 use yii\helpers\Url;
 
-$this->registerJsFile(Url::base().'/js/formulario.js');
+//$this->registerJsFile(Url::base().'/js/formulario.js');
 
 $this->title="Formulario de inscripción";
 ?>
@@ -22,15 +22,19 @@ $this->title="Formulario de inscripción";
 $this->registerJs("
  $.ajax({
         type: 'GET',
+        dataType:'HTML',
         url: 'inscripcion/traerdatos?id=$id',
         success: function (response) {
             $('#cargaContenido').html('');
             $('#contenido').html(response);
-           
+         
         },
         beforeSend:function(){
             $('#cargaContenido').html(\"<img src='" . Url::base() . "/images/Spinner.gif' /><h1>Obteniendo datos...</h1>\");
         }
-    });"
+    });
+    
+    "
+    
 );
 ?>

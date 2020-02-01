@@ -120,16 +120,16 @@
                 order by NombreMadre")->queryOne();
                $nivelModel=new ODEONivel();
                 $provinciaModel=new Provincia();
-                $this->layout='vacio';
+              $this->layout='vacio';
                 return $this->render('inscripcionExistente',['nivelModel'=>$nivelModel,'alumno'=>$alumno,'localidadModel'=>$localidadModel,'responsable'=>$responsable,'paises'=>$paises,'padre'=>$padre,'madre'=>$madre,'provinciaModel'=>$provinciaModel]);
             }else{//Caso en que el legajo que se ingreso no esta en la BD
-                echo "El legajo ingresado no existe";
+                
             }   
             }else{//Caso en que el legajo no fue ingresado
                 $provinciasModel= new ProvinciaLocal();
                 $localidadModel=new CiudadLocal();
                 $provincias=$provinciasModel->find()->select('*')->all();
-            $this->layout='vacio';
+                $this->layout='vacio';
                 return $this->render('index',['provincias'=>$provincias,'provinciaModel'=>$provinciasModel,'localidadModel'=>$localidadModel]);
             }
         }
@@ -173,7 +173,7 @@
 
 
 function actionIndex($id=""){
-    
+  
     return $this->render("inscripcion_form",['id'=>$id]);
 }
 
