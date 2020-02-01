@@ -150,7 +150,6 @@ function nivelGradoDivision(grado, nivel, division) {
                     $("select[name='alumno[seccion]']").append("<option value='" + divisiones[unaDivision].ODEO_DivisionKey + "' selected>" + divisiones[unaDivision].Nombre + "</option>");
                 } else {
                     $("select[name='alumno[seccion]']").append("<option value='" + divisiones[unaDivision].ODEO_DivisionKey + "'>" + divisiones[unaDivision].Nombre + "</option>");
-
                 }
             }
             for (unGrado in grados) {
@@ -230,7 +229,9 @@ function traerGrado(baseYii) {
                 $("select[name='alumno[grado]']").append('<option value=' + response[elem].ODEO_GradoKey + '>' + response[elem].DescripcionFacturacion + '</option>');
             }
         },
-        beforeSend:$("#cargaAsignaAlumno").html("<img src='" + baseYii + "/images/ajax-loader.gif' />Cargando,espere por favor...")
+        beforeSend:function(){
+            $("#cargaAsignaAlumno").html("<img src='" + baseYii + "/images/ajax-loader.gif' />Cargando,espere por favor...");
+        }
     });
 }
 /**
@@ -250,6 +251,8 @@ function traerDivision(baseYii) {
                 $("select[name='alumno[seccion]']").append('<option value=' + response[elem].ODEO_DivisionKey + '>' + response[elem].Nombre + '</option>');
             }
         },
-        beforeSend:$("#cargaAsignaAlumno").html("<img src='" + baseYii + "/images/ajax-loader.gif' />Cargando,espere por favor...")
+        beforeSend:function(){
+            $("#cargaAsignaAlumno").html("<img src='" + baseYii + "/images/ajax-loader.gif' />Cargando,espere por favor...");
+        }
     })
 }
