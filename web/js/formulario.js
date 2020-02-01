@@ -244,6 +244,7 @@ function traerDivision(baseYii) {
         data: { 'ODEO_gradoKey': +$("select[name='alumno[grado]']").val() },
         success: function (response) {
             $("select[name='alumno[seccion]']").html('');
+            $("#cargaAsignaAlumno").html('');
             for (elem in response) {
 
                 $("select[name='alumno[seccion]']").append('<option value=' + response[elem].ODEO_DivisionKey + '>' + response[elem].Nombre + '</option>');
