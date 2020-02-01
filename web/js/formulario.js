@@ -72,7 +72,6 @@ function datosAlumno(baseYii) {
         $("input[name='alumno[fechaConfirmacion]']").val('');
         $("input[name='alumno[lugarNacimiento]']").val('');
     } else {
-
         if ($("select[name='alumnos']").val() == '') {
             $("#alumnos").hide();
         } else {

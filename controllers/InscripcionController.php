@@ -25,8 +25,9 @@
         /**
          * Funcion encargada de recibir un legajo y en base al mismo mostrar datos
          */
-        function actionIndex($id=""){
+        function actionTraerdatos($id=""){
             if($id!=""){
+                
                 $localidadModel=new Localidad();
                 //Trae todos los alumnos según el legajo ingresado
                 $alumno=Yii::$app->db->createCommand("select a.ODEO_AlumnoKey,c.ClienteKey, a.Apellido, a.Nombre,
@@ -119,6 +120,7 @@
                 order by NombreMadre")->queryOne();
                $nivelModel=new ODEONivel();
                 $provinciaModel=new Provincia();
+                $this->layout='vacio';
                 return $this->render('inscripcionExistente',['nivelModel'=>$nivelModel,'alumno'=>$alumno,'localidadModel'=>$localidadModel,'responsable'=>$responsable,'paises'=>$paises,'padre'=>$padre,'madre'=>$madre,'provinciaModel'=>$provinciaModel]);
             }else{//Caso en que el legajo que se ingreso no esta en la BD
                 echo "El legajo ingresado no existe";
@@ -127,6 +129,7 @@
                 $provinciasModel= new ProvinciaLocal();
                 $localidadModel=new CiudadLocal();
                 $provincias=$provinciasModel->find()->select('*')->all();
+            $this->layout='vacio';
                 return $this->render('index',['provincias'=>$provincias,'provinciaModel'=>$provinciasModel,'localidadModel'=>$localidadModel]);
             }
         }
@@ -169,7 +172,10 @@
         }
 
 
-
+function actionIndex($id=""){
+    
+    return $this->render("inscripcion_form",['id'=>$id]);
+}
 
 
 /*///////////////////////////////FUNCIONES INVOCADAS DESDE EL FORMULARIO POR AJAX/////////////////////////////////////
@@ -188,11 +194,11 @@
             $localidades=Localidad::find()->select(['*'])->where(['ProvinciaKey'=>$idProvincia])->asArray()->all();
             return json_encode($localidades);
         }
-        function actionTraeralumno(){
+      /*  function actionTraeralumno(){
             $idAlumno=$_POST['ODEO_alumnoKey'];
             $alumno=ODEOAlumno::find()->select(['*'])->where(['ODEO_AlumnoKey'=>$idAlumno])->asArray()->all();
             return json_encode($alumno);
-        }
+        }*/
         function actionTraergrado(){
             $nivel=$_POST['ODEO_nivelKey'];
             $grados=ODEOGrado::find()->select(['*'])->where(['ODEO_NivelKey'=>$nivel])->asArray()->all();
