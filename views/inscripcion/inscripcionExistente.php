@@ -275,16 +275,20 @@ $alumnos["new"]='Nuevo alumno';//Genera la opcion de nuevo alumno en el select
            <div class="row">
            <div class="col-md-4">
                <?= $form->field($nivelModel,'Nombre')->dropDownList(ArrayHelper::map($nivelModel->find()->asArray()->all(),'ODEO_NivelKey','Nombre'), ['name'=>'alumno[nivel]','prompt' => 'Seleccione Uno' ,'class'=>'form-control'
-               ,'onchange'=>"traerGrado();"
+               ,'onchange'=>"traerGrado('".Url::base()."');"
                ])->label('Nivel'); ?>
            </div>
            <div class="col-md-4">
                <?= Html::label('Sala/Grado/Curso','alumno[grado]'); ?>
                <?=Html::dropDownList('alumno[grado]','',[],['class'=>'form-control',
-               'onclick'=>"traerDivision();"
+               'onclick'=>"traerDivision('".Url::base()."');"
                ]); ?>
            </div>
-           <div class="col-md-4">
+           <div class="col-md-3">
+               <?= Html::label('Seccion','alumno[seccion]'); ?>
+               <?=Html::dropDownList('alumno[seccion]','',[],['class'=>'form-control']); ?>
+           </div>
+           <div class="col-md-1" id="cargaAsignaAlumno">
                <?= Html::label('Seccion','alumno[seccion]'); ?>
                <?=Html::dropDownList('alumno[seccion]','',[],['class'=>'form-control']); ?>
            </div>

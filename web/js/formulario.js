@@ -216,25 +216,27 @@ function deshabilitarSacramento(unSacramento) {
  * Al hacer click en algun nivel autocompleta los grados que pertenecen al mismo
  */
 
-function traerGrado() {
+function traerGrado(baseYii) {
     $.ajax({
         type: 'POST',
         dataType: 'JSON',
         url: 'inscripcion/traergrado',
         data: { 'ODEO_nivelKey': +$("select[name='alumno[nivel]']").val() },
         success: function (response) {
+            $("#cargaAsignaAlumno").html('');
             $("select[name='alumno[grado]']").html('');
             $("select[name='alumno[seccion]']").html('');
             for (elem in response) {
                 $("select[name='alumno[grado]']").append('<option value=' + response[elem].ODEO_GradoKey + '>' + response[elem].DescripcionFacturacion + '</option>');
             }
-        }
+        },
+        beforeSend:$("#cargaAsignaAlumno").html("<img src='" + baseYii + "/images/ajax-loader.gif' />Cargando,espere por favor...")
     });
 }
 /**
  * Al hacer click en algun grado autocompleta las divisiones que pertenecen al mismo
  */
-function traerDivision() {
+function traerDivision(baseYii) {
     $.ajax({
         type: 'POST',
         dataType: 'JSON',
@@ -246,6 +248,7 @@ function traerDivision() {
 
                 $("select[name='alumno[seccion]']").append('<option value=' + response[elem].ODEO_DivisionKey + '>' + response[elem].Nombre + '</option>');
             }
-        }
+        },
+        beforeSend:$("#cargaAsignaAlumno").html("<img src='" + baseYii + "/images/ajax-loader.gif' />Cargando,espere por favor...")
     })
 }
