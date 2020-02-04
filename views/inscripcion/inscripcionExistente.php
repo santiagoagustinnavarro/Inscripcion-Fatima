@@ -20,7 +20,7 @@ $this->title = 'Formulario de inscripción';
 </div>
 <?php $form=ActiveForm::begin([
     'method' => 'post',
-    'action' => ['inscripcion/realizarinscripcion'],
+    'action' => ['solicitudinscripcion/solicitarinscripcion'],
     
 ]);?>
 <!---------------------------------------------------------------- Inicio Responsable------------------------------------------->
@@ -424,7 +424,7 @@ $alumnos["new"]='Nuevo alumno';//Genera la opcion de nuevo alumno en el select
     </div>
     <br />
     <br />
-    <?php echo Html::button('Guardar',['class'=>'btn btn-success','type'=>'submit','onclick'=>"alert('Acción en construcción')"]);?>
+    <?php echo Html::button('Guardar',['class'=>'btn btn-success','type'=>'submit']);?>
 </div>
 <?php 
 ActiveForm::end();

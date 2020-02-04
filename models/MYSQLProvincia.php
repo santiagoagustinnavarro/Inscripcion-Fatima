@@ -2,12 +2,12 @@
 namespace app\models;
 
 use Yii;
-class ProvinciaLocal extends \yii\db\ActiveRecord{
+class MYSQLProvincia extends \yii\db\ActiveRecord{
     public static function getDb() { 
         return Yii::$app->get('dbTwo'); // second database
      }
     public static function tableName(){
-        return 'Provincia';
+        return 'provincia';
     }
 
     public function rules()

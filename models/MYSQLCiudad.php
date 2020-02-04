@@ -1,7 +1,7 @@
 <?php
 namespace app\models;
 use Yii;
-class CiudadLocal extends \yii\db\ActiveRecord{
+class MYSQLCiudad extends \yii\db\ActiveRecord{
     public static function getDb() { 
         return Yii::$app->get('dbTwo'); // second database
      }
