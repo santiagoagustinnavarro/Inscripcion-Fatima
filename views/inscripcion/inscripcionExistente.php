@@ -83,7 +83,13 @@ $this->title = 'Formulario de inscripción';
     </div>
     <div class="col-md-6">
         <?= Html::label('Cuit/Cuil','padre[cuil]'); ?>
-        <?= Html::input('text','padre[cuil]',$padre['DocumentoPadre'],['class'=>'form-control']); ?>
+        <?php 
+        if($padre['TipoDocPadre']=='CUIT' || $padre['TipoDocPadre']=='CUIL'){
+               echo Html::input('text','padre[cuil]', $padre['DocumentoPadre'],['class'=>'form-control']); 
+        }else{
+            echo Html::input('text','padre[cuil]', '',['class'=>'form-control']);
+        }?>
+        
     </div>
 </div>
 
@@ -160,6 +166,7 @@ $this->title = 'Formulario de inscripción';
 
         <?=Html::dropDownList('padre[confirmacion]',$padre['ConfirmacionPadre'],['NO'=>'No','SI'=>'Si'],['class'=>'form-control']);  ?>
     </div>
+    <input name='padre[tipoDoc]' type="hidden" value=<?php echo $padre['TipoDocPadre'] ?>>
 </div>
 <!-------------------------------- Fin Padre------------------------------------------------------->
 <?=Html::tag('hr');?>
@@ -175,7 +182,12 @@ $this->title = 'Formulario de inscripción';
     </div>
     <div class="col-md-6">
         <?= Html::label('Cuit/Cuil','madre[cuil]'); ?>
-        <?= Html::input('text','madre[cuil]',$madre['DocumentoMadre'],['class'=>'form-control']); ?>
+        <?php 
+        if($madre['TipoDocMadre']=='CUIT' || $madre['TipoDocMadre']=='CUIL'){
+               echo Html::input('text','madre[cuil]', $madre['DocumentoMadre'],['class'=>'form-control']); 
+        }else{
+            echo Html::input('text','madre[cuil]', '',['class'=>'form-control']);
+        }?>
     </div>
 </div>
 
@@ -242,6 +254,7 @@ $this->title = 'Formulario de inscripción';
         <?= Html::label('Confirmacion','madre[confirmacion]'); ?>
         <?=Html::dropDownList('madre[confirmacion]',$madre['ConfirmacionMadre'],['SI'=>'Si','NO'=>'No'],['class'=>'form-control']); ?>
     </div>
+    <input name='madre[tipoDoc]' type="hidden" value=<?php echo $madre['TipoDocMadre'] ?>>
 </div>
 <!--------------------Fin madre----------------------------------------------------->
 <?= Html::tag('hr');?>
@@ -424,6 +437,7 @@ $alumnos["new"]='Nuevo alumno';//Genera la opcion de nuevo alumno en el select
     </div>
     <br />
     <br />
+    <input name='padre[tipoDoc]' type="hidden" value=<?php echo $padre['TipoDocPadre'] ?>>
     <?php echo Html::button('Guardar',['class'=>'btn btn-success','type'=>'submit']);?>
 </div>
 <?php 

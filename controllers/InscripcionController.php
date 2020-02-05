@@ -86,6 +86,7 @@
                 cpPrimaria.Valor as PrimariaPadre, cpSecundaria.Valor as SecundariaPadre,
                 cpBautismo.Valor as BautismoPadre,
                 cpComunion.Valor as ComunionPadre,
+                c.TipoDocumento as TipoDocPadre,
                 cpConfirmacion.Valor as ConfirmacionPadre from Cliente c
                 join V_ODEO_TitularesVigentes v on (c.ClienteKey = v.ClienteKey) left join Contacto cp on (c.ClienteKey = cp.ClienteKey) and (cp.TipoContactoKey = 1)
                 left join Pais pp on (cp.PaisNacimientoKey = pp.PaisKey) left join Localidad loc on (c.LocalidadKey = loc.LocalidadKey)
@@ -108,6 +109,7 @@
                 cmPrimaria.Valor as PrimariaMadre, cmSecundaria.Valor as SecundariaMadre,
                 cmBautismo.Valor as BautismoMadre,
                 cmComunion.Valor as ComunionMadre,
+                c.TipoDocumento as TipoDocMadre,
                 cmConfirmacion.Valor as ConfirmacionMadre from Cliente c
                 join V_ODEO_TitularesVigentes v on (c.ClienteKey = v.ClienteKey) left join Contacto cm on (c.ClienteKey = cm.ClienteKey) and (cm.TipoContactoKey = 2)
                 left join Pais pp on (cm.PaisNacimientoKey = pp.PaisKey) left join Localidad loc on (c.LocalidadKey = loc.LocalidadKey)

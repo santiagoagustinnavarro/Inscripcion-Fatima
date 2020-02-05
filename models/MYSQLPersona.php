@@ -13,8 +13,8 @@ class MYSQLPersona extends \yii\db\ActiveRecord{
     {
         return [
             [['persona_id'], 'required'],
-            [['persona_apellidos','persona_nombres','persona_cuil','persona_domicilio'], 'string'],
-            [['persona_nro_doc','persona_tipodoc','persona_sexo'],'integer']
+            [['persona_apellidos','persona_nombres','persona_cuil'], 'string'],
+            [['persona_nro_doc','persona_tipodoc','persona_sexo','persona_domicilio'],'integer']
           
            
            

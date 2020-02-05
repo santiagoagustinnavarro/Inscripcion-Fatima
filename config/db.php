@@ -2,7 +2,7 @@
 
 return [
     'class' => 'yii\db\Connection',
-    'dsn' => 'sqlsrv:server=localhost\SQLEXPRESS;database=PW_Gestion',
+    'dsn' => 'sqlsrv:server=NAVARRO-W10HP;database=PW_Gestion',
     'username' => 'sa',
     'password' => 'sip#2020',
     //srvbejerman

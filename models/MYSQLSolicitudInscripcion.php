@@ -12,7 +12,7 @@ class MYSQLSolicitudInscripcion extends \yii\db\ActiveRecord{
     public function rules()
     {
         return [
-            [['solicitud_id', 'solicitud_numero','solicitud_fecha','solicitud_estado','solicitud_establecimiento'], 'required'],
+            [['solicitud_id', 'solicitud_nro','solicitud_fecha','solicitud_estado','solicitud_establecimiento'], 'required'],
            
         ];
     }

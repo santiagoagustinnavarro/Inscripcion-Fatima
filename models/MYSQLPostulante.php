@@ -12,7 +12,7 @@ class MYSQLPostulante extends \yii\db\ActiveRecord{
     public function rules()
     {
         return [
-            [['postulante_id', ''], 'required'],
+            [['postulante_id'], 'required'],
             [['postulante_persona','postulante_confirmado','postulante_familia','postulante_nivel','postulante_responsable'], 'integer'],
           
            
