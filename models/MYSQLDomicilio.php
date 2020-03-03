@@ -1,6 +1,7 @@
 <?php
 namespace app\models;
 use Yii;
+use app\models\MYSQLCiudad;
 class MYSQLDomicilio extends \yii\db\ActiveRecord{
     public static function getDb() { 
         return Yii::$app->get('dbTwo'); // Base de datos en MYSQL
@@ -20,6 +21,9 @@ class MYSQLDomicilio extends \yii\db\ActiveRecord{
            
         ];
     }
+    public function getCiudad(){
+        return $this->hasOne(MYSQLCiudad::classname(),['domicilio_ciudad'=>'ciudad_id']);
+    }
 
     public function attributeLabels()
     {
@@ -29,7 +33,7 @@ class MYSQLDomicilio extends \yii\db\ActiveRecord{
             'domicilio_dpto' => 'Departamento',
             'domicilio_nro' => 'Numero',
             'domicilio_piso' => 'Piso',
-           
+            'domicilio_ciudad' => 'Ciudad',
             
 
         ];

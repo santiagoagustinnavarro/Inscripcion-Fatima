@@ -4,14 +4,14 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6797079b021af4d6444db74cded8bb54",
+    "content-hash": "20af2aaedfdf21c4fc96ff5f6bcc7ddc",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
             "version": "v3.4.1",
             "source": {
                 "type": "git",
-                "url": "git@github.com:twbs/bootstrap.git",
+                "url": "https://github.com/twbs/bootstrap.git",
                 "reference": "68b0d231a13201eb14acd3dc84e51543d16e5f7e"
             },
             "dist": {
@@ -33,7 +33,7 @@
             "version": "3.3.11",
             "source": {
                 "type": "git",
-                "url": "https://github.com/RobinHerbots/Inputmask.git",
+                "url": "git@github.com:RobinHerbots/Inputmask.git",
                 "reference": "5e670ad62f50c738388d4dcec78d2888505ad77b"
             },
             "dist": {
@@ -74,7 +74,7 @@
             "version": "1.12.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/components/jqueryui.git",
+                "url": "git@github.com:components/jqueryui.git",
                 "reference": "44ecf3794cc56b65954cc19737234a3119d036cc"
             },
             "dist": {
@@ -460,6 +460,81 @@
                 "yii2"
             ],
             "time": "2019-05-25T07:33:33+00:00"
+        },
+        {
+            "name": "rudissaar/yii2-fpdf",
+            "version": "v1.1.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rudissaar/yii2-fpdf.git",
+                "reference": "0cabca3762560624460ea944c4eacd366a94b645"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rudissaar/yii2-fpdf/zipball/0cabca3762560624460ea944c4eacd366a94b645",
+                "reference": "0cabca3762560624460ea944c4eacd366a94b645",
+                "shasum": ""
+            },
+            "require": {
+                "setasign/fpdf": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "rudissaar\\fpdf\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Kevin Rudissaar",
+                    "email": "kevin.rudissaar@gmail.com"
+                }
+            ],
+            "description": "FPDF plugin and wrapper for Yii2 framework.",
+            "time": "2018-01-16T13:23:47+00:00"
+        },
+        {
+            "name": "setasign/fpdf",
+            "version": "1.8.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Setasign/FPDF.git",
+                "reference": "d77904018090c17dc9f3ab6e944679a7a47e710a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Setasign/FPDF/zipball/d77904018090c17dc9f3ab6e944679a7a47e710a",
+                "reference": "d77904018090c17dc9f3ab6e944679a7a47e710a",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "fpdf.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Olivier Plathey",
+                    "email": "oliver@fpdf.org",
+                    "homepage": "http://fpdf.org/"
+                }
+            ],
+            "description": "FPDF is a PHP class which allows to generate PDF files with pure PHP. F from FPDF stands for Free: you may use it for any kind of usage and modify it to suit your needs.",
+            "homepage": "http://www.fpdf.org",
+            "keywords": [
+                "fpdf",
+                "pdf"
+            ],
+            "time": "2019-12-08T10:32:10+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",

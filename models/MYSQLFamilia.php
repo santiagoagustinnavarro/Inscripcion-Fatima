@@ -13,7 +13,7 @@ class MYSQLFamilia extends \yii\db\ActiveRecord{
     {
         return [
             [['familia_id'], 'required'],
-            [['familia_cant'],'integer']
+            [['familia_legajo'],'integer']
           
            
            

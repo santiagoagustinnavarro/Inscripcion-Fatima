@@ -6,6 +6,7 @@
 use app\widgets\Alert;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
+use yii\helpers\Url;
 use yii\bootstrap\NavBar;
 use yii\bootstrap\DropDown;
 use yii\widgets\Breadcrumbs;
@@ -16,6 +17,7 @@ AppAsset::register($this);
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
+
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -24,11 +26,12 @@ AppAsset::register($this);
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
-<body>
-<?php $this->beginBody() ?>
 
-<div class="wrap">
-    <?php
+<body>
+    <?php $this->beginBody() ?>
+
+    <div class="wrap">
+        <?php
     NavBar::begin([
         'brandLabel' => '<div class=\'glyphicon glyphicon-arrow-left\'> Volver</div>',
         'brandUrl' => Yii::$app->homeUrl,
@@ -38,8 +41,19 @@ AppAsset::register($this);
         ],
     ]);
     echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-left'],
-        
+        'options' => ['class' => 'navbar-nav navbar-right'],
+        'items'=>[ !isset($_SESSION['iniciado']) ? (
+            ''
+         ) : ('<li> '
+         .Html::a('Cambiar Clave',Url::toRoute(['usuario/update','id'=>$_SESSION['idAlumno']]),['class'=>'btn-link']).'</li>'
+         . '<li>'.Html::beginForm(['/usuario/sesion'], 'post')
+         . Html::submitButton(
+             '<span class="glyphicon glyphicon-log-out">Salir(Legajo:'.$_SESSION['username'].')</span>' ,
+             ['class' => 'btn btn-link logout']
+         )
+         . Html::endForm()
+         . '</li>'
+         )]
             
             
             
@@ -48,24 +62,25 @@ AppAsset::register($this);
     NavBar::end();
     ?>
 
-    <div class="container">
-        <?= Breadcrumbs::widget([
+        <div class="container">
+            <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
-        <?= Alert::widget() ?>
-        <?= $content ?>
+            <?= Alert::widget() ?>
+            <?= $content ?>
+        </div>
     </div>
-</div>
 
-<footer class="footer">
-    <div class="container">
-        <p class="pull-left">Copyright &copy; COLEGIO FÁTIMA <?= date('Y') ?></p>
+    <footer class="footer">
+        <div class="container">
+            <p class="pull-left">Copyright &copy; COLEGIO FÁTIMA <?= date('Y') ?></p>
 
-       
-    </div>
-</footer>
 
-<?php $this->endBody() ?>
+        </div>
+    </footer>
+
+    <?php $this->endBody() ?>
 </body>
+
 </html>
 <?php $this->endPage() ?>

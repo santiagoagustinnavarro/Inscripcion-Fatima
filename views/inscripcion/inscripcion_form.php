@@ -29,6 +29,9 @@ $this->registerJs("
             $('#contenido').html(response);
          
         },
+        error:function(){
+            $('#cargaContenido').html('ha ocurrido un error interno');
+        },
         beforeSend:function(){
             $('#cargaContenido').html(\"<img src='" . Url::base() . "/images/Spinner.gif' /><h1>Obteniendo datos...</h1>\");
         }

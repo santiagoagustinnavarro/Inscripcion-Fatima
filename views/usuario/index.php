@@ -4,28 +4,35 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
 /* @var $this yii\web\View */
+/* @var $searchModel app\models\MYSQLUsuarioSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Alumno Locals';
+$this->title = 'Mysql Usuarios';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="alumno-local-index">
+<div class="mysqlusuario-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Alumno Local', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Mysql Usuario', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php Pjax::begin(); ?>
+    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
+        'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-            
-            'alumno_id',
-            'alumno_postulante',
+
+            'usuario_id',
+            'usuario_nick',
+            'usuario_nombre',
+            'usuario_clave',
+            'usuario_activo',
+            //'usuario_creado:boolean',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

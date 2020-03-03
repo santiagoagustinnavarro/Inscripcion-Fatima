@@ -3,7 +3,8 @@
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
 $dbTwo = require __DIR__ . '/dbTwo.php';
-$config = [
+$config = [ 'language' => 'es',
+
     'id' => 'basic',
     
     'name'=>'Inscripcion',
@@ -31,10 +32,14 @@ $config = [
         ],
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
-            // send all mails to a file by default. You have to set
-            // 'useFileTransport' to false and configure a transport
-            // for the mailer to send real emails.
-            'useFileTransport' => true,
+            'transport' => [
+                'class' => 'Swift_SmtpTransport',
+                'host' => 'smtp.gmail.com',
+                'username' => 'santiagoanavarro018@gmail.com',
+                'password' => '38365920s',
+                'port' => '587',
+                'encryption' => 'tls',
+            ],
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,

@@ -1,3 +1,91 @@
+
+
+$("#enviarFormulario").click(function(){
+  var res;
+    if(confirm("¿Seguro de realizar la inscripción?")){
+        $("#formInscripcion").find("input:disabled").prop('disabled',false);
+        $("#formInscripcion").find("input:disabled").val('--');
+        $("#formInscripcion").submit();
+        res=true;
+    }else{
+        res=false;
+    }
+    //for(i;i<)
+   return res;
+});
+/**Al presionar sobre el boton de cargar alumno se generan los inputs correspondientes
+ *  (que luegon seran array al recibirlos) por post
+ *  
+*/
+var primero = 0;
+$("button[name='agregaAlumno']").click(function () {
+    var confirmacion = confirm("¿Seguro desea agregarlo?. Una vez realizado no podra editar este alumno nuevamente");
+    if (confirmacion) {
+        var idDivision = $("select[name='alumno[seccion]']").val();
+        var idNivel = $("select[name='alumno[nivel]']").val();
+        var id = $("select[name='alumnos']").val();
+        var nombre = $("input[name='alumno[nombre]']").val();
+        var apellido = $("input[name='alumno[apellidos]']").val();
+        var dni = $("input[name='alumno[dni]']").val();
+        var sexo = $("select[name='alumno[sexo]']").val();
+        var nivel = $("select[name='alumno[nivel]'] option:selected").text();
+        var grado = $("select[name='alumno[grado]'] option:selected").text();
+        var division = $("select[name='alumno[seccion]'] option:selected").text();
+        var lugarNacimiento = $("input[name='alumno[lugarNacimiento]']").val();
+        var fechaNacimiento = $("input[name='alumno[fechaNacimiento]']").val();
+        var fechaIngreso = $("input[name='alumno[fechaIngreso]']").val();
+        var fechaEgreso = $("input[name='alumno[fechaEgreso]']").val();
+        var bautismo = $("select[name='alumno[bautismo]']").val();
+        var lugarBautismo = $("input[name='alumno[lugarBautismo]']").val();
+        var fechaBautismo = $("input[name='alumno[fechaBautismo]']").val();
+        var diosecisBautismo = $("input[name='alumno[diosecisBautismo]']").val();
+        var comunion = $("select[name='alumno[comunion]']").val();
+        var lugarComunion = $("input[name='alumno[lugarComunion]']").val();
+        var fechaComunion = $("input[name='alumno[fechaComunion]']").val();
+        var diosecisComunion = $("input[name='alumno[diosecisComunion]']").val();
+        var confirmacion = $("select[name='alumno[confirmacion]']").val();
+        var lugarConfirmacion = $("input[name='alumno[lugarConfirmacion]']").val();
+        var fechaConfirmacion = $("input[name='alumno[fechaConfirmacion]']").val();
+        var diosecisConfirmacion = $("input[name='alumno[diosecisConfirmacion]']").val();
+        var atributos = ['nivel_id','division_id', 'persona_id', 'nombre', 'apellido', 'dni', 'sexo', 'nivel', 'grado', 'division', 'lugarNacimiento', 'fechaNacimiento', 'fechaIngreso', 'fechaEgreso', 'bautismo', 'lugarBautismo', 'fechaBautismo', 'diosecisBautismo', 'comunion', 'lugarComunion', 'fechaComunion', 'diosecisComunion', 'confirmacion', 'lugarConfirmacion', 'fechaConfirmacion', 'diosecisConfirmacion'];
+        var valores = [idNivel,idDivision, id, nombre, apellido, dni, sexo, nivel, grado, division, lugarNacimiento, fechaNacimiento, fechaIngreso, fechaEgreso, bautismo, lugarBautismo, fechaBautismo, diosecisBautismo, comunion, lugarComunion, fechaComunion, diosecisComunion, confirmacion, lugarConfirmacion, fechaConfirmacion, diosecisConfirmacion];
+        var i;
+        var pos;
+        var size = Math.trunc($("input[name*='alumnosArray']").length / 26);
+
+
+        verificarCamposVacios(valores)
+
+        for (i = 0; i < 26; i++) {
+
+            $("#cargaAlumnos").before("<input type='hidden' name='alumnosArray[" + size + "][" + atributos[i] + "]' value='" + valores[i] + "'>")
+
+        }
+
+        if ($("select[name='alumnos']").val() != "new") {
+            $("select[name='alumnos']").find("option[value='" + id + "']").remove();
+            $("select[name='alumnos']").val('');
+        }
+        datosAlumno("");
+    }
+
+})
+
+/**
+ * Esta funcion verifica si los valores dados son indefinidos en cuyo caso le 
+ * asigna el valor -
+ * @param {Array} valores
+ */
+function verificarCamposVacios(valores) {
+    var j;
+    for (j = 0; j < 26; j++) {
+        if (typeof (valores[j]) == "undefined" || valores[j] == "") {
+            valores[j] = "--";
+        }
+    }
+    return valores;
+}
+
 /**
  * Esta función se encarga de traer las localidades 
  * cada vez que se cambia la provincia seleccionada (Respecto a la sección del responsable)
@@ -13,10 +101,20 @@ function traerLocalidades(baseYii) {
             var array, elem;
             $('#cargaLocalidad').html('');
             $("select[name='responsable[localidad]']").html('');
+            var l=0;
             for (elem in response) {
+                if(l==0){
+                   
+
+                    $("select[name='responsable[localidad]']").append('<option selected='+"'selected'"+' value=' + response[elem].LocalidadKey + '>' + response[elem].Nombre + '</option>');
+                    traerCP(baseYii)
+                    //$("input[name='responsable[codigo_postal]']").val(response[elem].CodigoPostal);
+            }else{
                 $("input[name='responsable[codigo_postal]']").val(response[elem].CodigoPostal);
 
                 $("select[name='responsable[localidad]']").append('<option value=' + response[elem].LocalidadKey + '>' + response[elem].Nombre + '</option>');
+            }
+            l=l+1;
             }
         }
         ,
@@ -59,6 +157,7 @@ function traerCP(baseYii) {
  *  @param {String} baseYii
  */
 function datosAlumno(baseYii) {
+
     if ($("select[name='alumnos']").val() == 'new') {//Caso en el que se ingresa un nuevo alumno (limpieza de datos alumno)
         $("#alumnos").show();
         $("input[name='alumno[nombre]']").val('');
@@ -73,10 +172,13 @@ function datosAlumno(baseYii) {
         $("input[name='alumno[lugarNacimiento]']").val('');
     } else {
         if ($("select[name='alumnos']").val() == '') {
-            $("#alumnos").hide();
+            $("[ id*=seleccionado]").hide();
         } else {
+            var valor=$("select[name='alumnos']").val()
+            $("[ id*=seleccionado]").hide();
+            $("#seleccionado"+valor).show();
             //El alumno ya se encuentra cargado en la BD
-            $.ajax({
+            /*$.ajax({
                 type: 'POST',
                 dataType: 'JSON',
                 url: 'inscripcion/traeralumnocompleto',
@@ -90,7 +192,7 @@ function datosAlumno(baseYii) {
                 , beforeSend: function () {
                     $("#cargaAlumnos").html("<img src='" + baseYii + "/images/ajax-loader.gif' />Cargando,espere por favor...");
                 }
-            })
+            })*/
         }
     }
 }
@@ -125,7 +227,7 @@ function cargaAlumnoAux(arrayAlumno) {
             , "comunion": { "valor": arrayAlumno[elem].Comunion, "fecha": arrayAlumno[elem].FechaComunion, "lugar": arrayAlumno[elem].LugarComunion, "diosecis": arrayAlumno[elem].DiosecisComunion }
             , "confirmacion": { "valor": arrayAlumno[elem].Confirmacion, "fecha": arrayAlumno[elem].FechaConfirmacion, "lugar": arrayAlumno[elem].LugarConfirmacion, "diosecis": arrayAlumno[elem].DiosecisConfirmacion },
         };
-        cargaSacramentos(sacramentos);
+       
     }
 }
 /**
@@ -167,46 +269,27 @@ function nivelGradoDivision(grado, nivel, division) {
 
     });
 }
-/**
- *  Esta función se encarga de la carga inicial de sacramentos del alumno al seleccionarlo 
- * @param {Array} datosSacramento 
- */
-function cargaSacramentos(datosSacramento) {
-    $("select[name='alumno[bautismo]']").val(datosSacramento["bautismo"]["valor"]);
-    $("select[name='alumno[comunion]']").val(datosSacramento["comunion"]["valor"]);
-    $("select[name='alumno[confirmacion]']").val(datosSacramento["confirmacion"]["valor"]);
-    $("input[name='alumno[diosecisBautismo]']").val(datosSacramento['bautismo']['diosecis']);
-    $("input[name='alumno[diosecisComunion]']").val(datosSacramento['comunion']['diosecis']);
-    $("input[name='alumno[diosecisConfirmacion]']").val(datosSacramento['confirmacion']['diosecis']);
-    $("input[name='alumno[lugarBautismo]']").val(datosSacramento['bautismo']['lugar']);
-    $("input[name='alumno[lugarComunion]']").val(datosSacramento['comunion']['lugar']);
-    $("input[name='alumno[lugarConfirmacion]']").val(datosSacramento['confirmacion']['lugar']);
-    $("input[name='alumno[fechaBautismo]']").val(datosSacramento['bautismo']['fecha']);
-    $("input[name='alumno[fechaComunion]']").val(datosSacramento['comunion']['fecha']);
-    $("input[name='alumno[fechaConfirmacion]']").val(datosSacramento['confirmacion']['fecha']);
-    deshabilitarSacramento("bautismo")
-    deshabilitarSacramento("comunion");
-    deshabilitarSacramento("confirmacion");
 
-}
 ////////////////////////////// Fin de traer los datos del alumno seleccionado/////////////////////////////////////////
 /**
  * Dado algún sacramento verifica si se dispone de el , habilitando o deshabilitando según corresponda
  * @param {String} unSacramento 
  */
-function deshabilitarSacramento(unSacramento) {
+function deshabilitarSacramento(unSacramento,pos) {
     var sacramentoUpper = unSacramento.charAt(0).toUpperCase() + unSacramento.slice(1);
-    if ($("select[name='alumno[" + unSacramento + "]']").val() == "NO") {
-        $("input[name='alumno[lugar" + sacramentoUpper + "]']").val('');
-        $("input[name='alumno[fecha" + sacramentoUpper + "]']").val('');
-        $("input[name='alumno[diosecis" + sacramentoUpper + "]']").val('');
-        $("input[name='alumno[lugar" + sacramentoUpper + "]']").prop("disabled", true);
-        $("input[name='alumno[diosecis" + sacramentoUpper + "]']").prop("disabled", true);
-        $("input[name='alumno[fecha" + sacramentoUpper + "]']").prop("disabled", true);
+    if ($("select[name='alumnosArray["+pos+"][" + unSacramento + "]']").val() == "NO") {
+        $("input[name='alumnosArray["+pos+"][lugar" + sacramentoUpper + "]']").val('');
+        $("input[name='alumnosArray["+pos+"][fecha" + sacramentoUpper + "]']").val('');
+        $("input[name='alumnosArray["+pos+"][diosecis" + sacramentoUpper + "]']").val('');
+        $("input[name='alumnosArray["+pos+"][lugar" + sacramentoUpper + "]']").prop("disabled", true);
+        $("input[name='alumnosArray["+pos+"][diosecis" + sacramentoUpper + "]']").prop("disabled", true);
+        $("input[name='alumnosArray["+pos+"][fecha" + sacramentoUpper + "]']").prop("disabled", true);
+      
     } else {
-        $("input[name='alumno[lugar" + sacramentoUpper + "]']").prop("disabled", false);
-        $("input[name='alumno[fecha" + sacramentoUpper + "]']").prop("disabled", false);
-        $("input[name='alumno[diosecis" + sacramentoUpper + "]']").prop("disabled", false);
+        $("input[name='alumnosArray["+pos+"][lugar" + sacramentoUpper + "]']").prop("disabled", false);
+        $("input[name='alumnosArray["+pos+"][fecha" + sacramentoUpper + "]']").prop("disabled", false);
+        $("input[name='alumnosArray["+pos+"][diosecis" + sacramentoUpper + "]']").prop("disabled", false);
+       // $("input[name='alumnosArray["+pos+"][fecha" + sacramentoUpper + "]']").removeAttr("er");
     }
 }
 
@@ -214,21 +297,29 @@ function deshabilitarSacramento(unSacramento) {
  * Al hacer click en algun nivel autocompleta los grados que pertenecen al mismo
  */
 
-function traerGrado(baseYii) {
+function traerGrado(baseYii,pos) {
     $.ajax({
         type: 'POST',
         dataType: 'JSON',
         url: 'inscripcion/traergrado',
-        data: { 'ODEO_nivelKey': +$("select[name='alumno[nivel]']").val() },
+        data: { 'ODEO_nivelKey': +$("select[name='alumnosArray["+pos+"][nivel]']").val() },
         success: function (response) {
             $("#cargaAsignaAlumno").html('');
-            $("select[name='alumno[grado]']").html('');
-            $("select[name='alumno[seccion]']").html('');
+            $("select[name='alumnosArray["+pos+"][grado]']").html('');
+            $("select[name='alumnosArray["+pos+"][seccion]']").html('');
+            var i=0;
             for (elem in response) {
-                $("select[name='alumno[grado]']").append('<option value=' + response[elem].ODEO_GradoKey + '>' + response[elem].DescripcionFacturacion + '</option>');
+               if(i==0){
+                $("select[name='alumnosArray["+pos+"][grado]']").append('<option selected='+"'selected'"+ 'value=' + response[elem].ODEO_GradoKey + '>' + response[elem].DescripcionFacturacion + '</option>');
+
+               }else{
+                    $("select[name='alumnosArray["+pos+"][grado]']").append('<option value=' + response[elem].ODEO_GradoKey + '>' + response[elem].DescripcionFacturacion + '</option>');
+                }
+                i=i+1;
+                traerDivision(baseYii,pos);
             }
         },
-        beforeSend:function(){
+        beforeSend: function () {
             $("#cargaAsignaAlumno").html("<img src='" + baseYii + "/images/ajax-loader.gif' />Cargando,espere por favor...");
         }
     });
@@ -236,21 +327,21 @@ function traerGrado(baseYii) {
 /**
  * Al hacer click en algun grado autocompleta las divisiones que pertenecen al mismo
  */
-function traerDivision(baseYii) {
+function traerDivision(baseYii,pos) {
     $.ajax({
         type: 'POST',
         dataType: 'JSON',
         url: 'inscripcion/traerdivision',
-        data: { 'ODEO_gradoKey': +$("select[name='alumno[grado]']").val() },
+        data: { 'ODEO_gradoKey': +$("select[name='alumnosArray["+pos+"]"+"[grado]']").val() },
         success: function (response) {
-            $("select[name='alumno[seccion]']").html('');
+            $("select[name='alumnosArray["+pos+"][seccion]']").html('');
             $("#cargaAsignaAlumno").html('');
             for (elem in response) {
 
-                $("select[name='alumno[seccion]']").append('<option value=' + response[elem].ODEO_DivisionKey + '>' + response[elem].Nombre + '</option>');
+                $("select[name='alumnosArray["+pos+"][seccion]']").append('<option value=' + response[elem].ODEO_DivisionKey + '>' + response[elem].Nombre + '</option>');
             }
         },
-        beforeSend:function(){
+        beforeSend: function () {
             $("#cargaAsignaAlumno").html("<img src='" + baseYii + "/images/ajax-loader.gif' />Cargando,espere por favor...");
         }
     })

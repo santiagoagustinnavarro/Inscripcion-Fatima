@@ -13,8 +13,9 @@ class MYSQLPersonaFormaFamilia extends \yii\db\ActiveRecord{
     {
         return [
             [['familia_id','persona_id'], 'required'],
-            [['parentezco'],'string']
-           
+            [['parentezco'],'string'],
+            [['persona_id'], 'exist', 'skipOnError' => true, 'targetClass' => MYSQLPersona::className(), 'targetAttribute' => ['persona_id' => 'persona_id']],
+            [['familia_id'], 'exist', 'skipOnError' => true, 'targetClass' => MYSQLFamilia::className(), 'targetAttribute' => ['familia_id' => 'familia_id']],
            
         ];
     }
@@ -29,6 +30,20 @@ class MYSQLPersonaFormaFamilia extends \yii\db\ActiveRecord{
 
         ];
 
+    }
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getFamilia()
+    {
+        return $this->hasOne(MYSQLFamilia::className(), ['familia_id' => 'familia_id']);
+    }
+      /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPersona()
+    {
+        return $this->hasOne(MYSQLPersona::className(), ['persona_id' => 'persona_id']);
     }
 
 }

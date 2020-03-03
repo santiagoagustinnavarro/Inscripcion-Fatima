@@ -1,7 +1,7 @@
 <?php
 namespace app\models;
 use Yii;
-class MYSQLSolicitudInscripcion extends \yii\db\ActiveRecord{
+class MYSQLSolicitudOtorgada extends \yii\db\ActiveRecord{
     public static function getDb() { 
         return Yii::$app->get('dbTwo'); // Base de datos en MYSQL
      }
@@ -12,7 +12,8 @@ class MYSQLSolicitudInscripcion extends \yii\db\ActiveRecord{
     public function rules()
     {
         return [
-            [['solicitud_otorga_id', 'solicitud_otorga_solis','solicitud_fecha','solicitud_otorga_fecha','solicitud_otorga_nro'], 'required'],
+            [['solicitud_otorga_id', 'solicitud_otorga_solic','solicitud_fecha','solicitud_otorga_fecha','solicitud_otorga_nro'], 'required'],
+            [['solicitud_otorga_solic'],'exist','skipOnError' => true,'targetClass'=>MYSQLSolicitudInscripcion::classname(),'targetAttributte'=>['solicitud_id','solicitud_otoroga_solic']]
            
         ];
     }
@@ -27,6 +28,9 @@ class MYSQLSolicitudInscripcion extends \yii\db\ActiveRecord{
             
         ];
 
+    }
+    public function getSolicitud(){
+        return $this->hasOne(MYSQLSolcitudInscripcion::classname(),['solicitud_id','solicitud_otoroga_solic']);
     }
 
 }
