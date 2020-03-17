@@ -162,7 +162,7 @@ class SolicitudinscripcionController extends Controller
                             $alumno=MYSQLAlumno::find()->innerJoin('postulante','postulante.postulante_id=alumno.alumno_postulante')->where('alumno.alumno_id='.$unAlumno['persona_id'])->one();
                             if(is_null($alumno)){//Alumno añadido recientemente(nunca estuvo)
                                 $post=new MYSQLPostulante();
-                                $responsableBuscado=$this->db2->createCommand("select persona.persona_domicilio,responsable.responsable_id from familia inner join persona_forma_familia on familia.familia_id=persona_forma_familia.familia_id inner join persona on persona.persona_id=persona_forma_familia.persona_id inner join postulante on postulante.postulante_persona=persona.persona_id inner join responsable on postulante.postulante_responsable=responsable.responsable_id ")->asArray()->queryOne();
+                                $responsableBuscado=Yii::$app->dbTwo->createCommand("select persona.persona_domicilio,responsable.responsable_id from familia inner join persona_forma_familia on familia.familia_id=persona_forma_familia.familia_id inner join persona on persona.persona_id=persona_forma_familia.persona_id inner join postulante on postulante.postulante_persona=persona.persona_id inner join responsable on postulante.postulante_responsable=responsable.responsable_id ")->queryOne();
                                 $id=$this->idMaximo('postulante_id','postulante');
                                 if($id==""){
                                     $id=1;
